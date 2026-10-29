@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 13, 13, 18;
+  --background-end-rgb: 13, 13, 18;
+}
+
+body {
+  font-family: var(--font-tajawal), system-ui, sans-serif;
+  background: #0D0D12;
+  color: rgb(var(--foreground-rgb));
+}
+
+@layer utilities {
+  .text-gold {
+    color: #FFD700;
+  }
+  .bg-gold {
+    background-color: #FFD700;
+  }
+  .border-gold {
+    border-color: #D4AF37;
+  }
+  .shadow-gold {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  }
+}
