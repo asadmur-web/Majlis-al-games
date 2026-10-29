@@ -104,14 +104,14 @@ export function setupPhase3Handlers(io: Server) {
     socket.on('phase3-start', (data: { traitorId: string; playerCount: number }) => {
       try {
         const session = phase3Manager.initSession(
-          socket.hand.query?.roomCode as string,
+          socket.handshakeshake.query?.roomCode as string,
           data.traitorId,
           data.playerCount
         );
-        phase3Sessions.set(socket.hand.query?.roomCode as string, session);
+        phase3Sessions.set(socket.handshakeshake.query?.roomCode as string, session);
 
-        socket.to(socket.hand.query?.roomCode as string).emit('phase3-started', {
-          roomCode: socket.hand.query?.roomCode as string,
+        socket.to(socket.handshakeshake.query?.roomCode as string).emit('phase3-started', {
+          roomCode: socket.handshakeshake.query?.roomCode as string,
           traitorId: data.traitorId,
           playerCount: data.playerCount,
           timeLimit: 120,
@@ -123,7 +123,7 @@ export function setupPhase3Handlers(io: Server) {
     });
 
     socket.on('phase3-vote', (data: { vote: 'traitor' | 'citizen' }) => {
-      const roomCode = socket.hand.query?.roomCode as string;
+      const roomCode = socket.handshakeshake.query?.roomCode as string;
       const session = phase3Sessions.get(roomCode);
       if (!session) {
         socket.emit('error', { message: 'Phase 3 session not initialized' });
@@ -154,7 +154,7 @@ export function setupPhase3Handlers(io: Server) {
     });
 
     socket.on('phase3-skip-vote', () => {
-      const roomCode = socket.hand.query?.roomCode as string;
+      const roomCode = socket.handshakeshakeshake.query?.roomCode as string;
       const session = phase3Sessions.get(roomCode);
       if (!session) return;
 
@@ -176,14 +176,14 @@ export function setupPhase4Handlers(io: Server) {
     socket.on('phase4-start', (data: { traitorId: string; playerCount: number }) => {
       try {
         const session = phase4Manager.initSession(
-          socket.hand.query?.roomCode as string,
+          socket.handshake.query?.roomCode as string,
           data.traitorId,
           data.playerCount
         );
-        phase4Sessions.set(socket.hand.query?.roomCode as string, session);
+        phase4Sessions.set(socket.handshake.query?.roomCode as string, session);
 
-        socket.to(socket.hand.query?.roomCode as string).emit('phase4-started', {
-          roomCode: socket.hand.query?.roomCode as string,
+        socket.to(socket.handshake.query?.roomCode as string).emit('phase4-started', {
+          roomCode: socket.handshake.query?.roomCode as string,
           traitorId: data.traitorId,
           playerCount: data.playerCount,
           defenseTimeLimit: 30,
@@ -195,7 +195,7 @@ export function setupPhase4Handlers(io: Server) {
     });
 
     socket.on('phase4-defense', (data: { answer: string }) => {
-      const roomCode = socket.hand.query?.roomCode as string;
+      const roomCode = socket.handshake.query?.roomCode as string;
       const session = phase4Sessions.get(roomCode);
       if (!session) {
         socket.emit('error', { message: 'Phase 4 session not initialized' });
@@ -230,7 +230,7 @@ export function setupPhase4Handlers(io: Server) {
     });
 
     socket.on('phase4-determine-result', () => {
-      const roomCode = socket.hand.query?.roomCode as string;
+      const roomCode = socket.handshake.query?.roomCode as string;
       const session = phase4Sessions.get(roomCode);
       if (!session) return;
 
